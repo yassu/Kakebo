@@ -1,5 +1,8 @@
 #!/usr/bin/env python3 
-from sys import argv
+from   sys               import argv
+from   numpy             import *
+from   copy              import deepcopy
+import matplotlib.pyplot as     plt
 
 def trim_both(text):
     while len(text)>0 and text[0] in (' ', '\t'):
@@ -59,8 +62,38 @@ def obtain_regress(data):
     a = sxy / sx2
     return a, ym - a * xm
 
-def plot(data):
-    """ plot points by using tkinter"""
+def plot_data(datas):
+    """ plot points by using matplotlib """
+    plt.title('Kakebo')
+    plt.xlabel('date')
+    plt.ylabel('money')
+    datas = datas[:]
+    # plot datas
+    t = arange(0.0, 1.0, 0.0001)
+
+    ## plot
+    # plot datas
+    max_x = max([datas[i][0] for i in range(len(datas))])
+    min_x = min([datas[i][0] for i in range(len(datas))])
+
+    print(max_x)
+    n = len(datas)
+
+    plt.plot(0,0)
+    pl_data = deepcopy(datas)
+    while len(pl_data) > 1:
+        s_x, s_y = pl_data[0]
+        e_x, e_y = pl_data[1]
+        plt.plot(e_x*t + (1-t)*s_x, e_y*t + (1-t)*s_y, 'b-')
+        pl_data = pl_data[1:]
+
+    # plot regression line
+    a,b = obtain_regress(datas)
+    x = arange(min_x, max_x, 0.0001)
+    plt.plot(x, a*x+b, 'r-')
+
+    plt.show()
+
 
 def main(filename):
     """
@@ -75,6 +108,8 @@ def main(filename):
 
     print('average moneys   : {}' .format(average))
     print('regression coeff : {}' .format(regression_coef))
+    
+    plot_data(data)
 
 def trim_test():
     s = ' fjp rjqp  rjqr  '
