@@ -1,0 +1,16 @@
+====== 2014/02/14(Fri)
+eat lunch              : -100 : 1000
+
+-- comment
+eat dinner             : -100 : 900
+
+====== 2014/02/15(Wed)
+
+eat lunch              : -300 : 600
+eat dinner             : -600 : 0
+
+====== 2014/02/16(Thu)
+
+go Bank : +10000 : 10000
+eat lunch: -210: 9790
+
