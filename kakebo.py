@@ -46,7 +46,7 @@ def parse_money(filename):
                     a_money[-1] += int(income[1:])
             except Exception:
                 print('line{num} ParseError."{line}" can\'t parsed.'.format(
-                    num=num_line, line=line)
+                    num=num_line + 1, line=line)
                 )
                 exit()
 
