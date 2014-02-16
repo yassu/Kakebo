@@ -59,9 +59,6 @@ def obtain_regress(data):
     a = sxy / sx2
     return a, ym - a * xm
 
-def print_result_analysis(moneys):
-    """ print result """
-
 def plot(data):
     """ plot points by using tkinter"""
 
