@@ -90,7 +90,6 @@ def plot_data(datas):
     max_x = max([datas[i][0] for i in range(len(datas))])
     min_x = min([datas[i][0] for i in range(len(datas))])
 
-    print(max_x)
     n = len(datas)
 
     plt.plot(0, 0)
