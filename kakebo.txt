@@ -1,5 +1,8 @@
 ======
--- content, : income : rest money
+-- content : income : rest money
+a:-100:10285
+
+====== 
 
 eat Ramen   : -800   : 9485
 buy Pepshi  : -100   : 9385

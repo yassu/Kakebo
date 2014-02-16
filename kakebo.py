@@ -1,5 +1,5 @@
 #!/usr/bin/env python3 
-from   sys               import argv
+from optparse import OptionParser
 from   numpy             import *
 from   copy              import deepcopy
 import matplotlib.pyplot as     plt
@@ -95,21 +95,6 @@ def plot_data(datas):
     plt.show()
 
 
-def main(filename):
-    """
-    print result of analysis
-    if graphic mode, plot this by using gnuplot
-    """
-    moneys = parse_money(filename)
-    average = get_average(moneys)
-
-    data = list(zip(list(range(len(moneys))), moneys))
-    regression_coef = obtain_regress(data)[0]
-
-    print('average moneys   : {}' .format(average))
-    print('regression coeff : {}' .format(regression_coef))
-    
-    plot_data(data)
 
 def trim_test():
     s = ' fjp rjqp  rjqr  '
@@ -125,5 +110,31 @@ def obtain_regression_test():
           ]
     print(obtain_regress(data))
 
-filename = argv[1]
-main(filename)
+def main(filename, opts):
+    """
+    print result of analysis
+    if graphic mode, plot this by using gnuplot
+    """
+    moneys = parse_money(filename)
+    average = get_average(moneys)
+
+    data = list(zip(list(range(len(moneys))), moneys))
+    regression_coef = obtain_regress(data)[0]
+
+    print('average moneys   : {:.02f}' .format(average))
+    print('regression coeff : {:.02f}' .format(regression_coef))
+
+    if opts.graphical is not None:
+        plot_data(data)
+
+if __name__ == '__main__':
+    is_main = True
+
+    if is_main:
+        p = OptionParser(version='ver:{}'.format(__version__))
+        p.add_option('-g', '--graphical', 
+                     action='store_false',
+                     help='plot result of analysis')
+        opts, argv = p.parse_args()
+        filename = argv[0]
+        main(filename, opts)
