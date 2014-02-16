@@ -101,7 +101,7 @@ def plot_data(datas):
         pl_data = pl_data[1:]
 
     # plot regression line
-    if len(pl_data) > 1:
+    if len(datas) > 1:
         a, b = obtain_regress(datas)
         x = arange(min_x, max_x, 0.0001)
         plt.plot(x, a * x + b, 'r-')
