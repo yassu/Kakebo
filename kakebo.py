@@ -101,9 +101,10 @@ def plot_data(datas):
         pl_data = pl_data[1:]
 
     # plot regression line
-    a, b = obtain_regress(datas)
-    x = arange(min_x, max_x, 0.0001)
-    plt.plot(x, a * x + b, 'r-')
+    if len(pl_data) > 1:
+        a, b = obtain_regress(datas)
+        x = arange(min_x, max_x, 0.0001)
+        plt.plot(x, a * x + b, 'r-')
 
     plt.show()
 
@@ -134,10 +135,12 @@ def main(filename, opts):
     average = get_average(moneys)
 
     data = list(zip(list(range(len(moneys))), moneys))
-    regression_coef = obtain_regress(data)[0]
+    if len(moneys) > 1:
+        regression_coef = obtain_regress(data)[0]
 
     print('average moneys   : {:.02f}' .format(average))
-    print('regression coeff : {:.02f}' .format(regression_coef))
+    if len(moneys) > 1:
+        print('regression coeff : {:.02f}' .format(regression_coef))
 
     if opts.graphical is not None:
         plot_data(data)
