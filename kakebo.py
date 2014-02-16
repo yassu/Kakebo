@@ -1,4 +1,5 @@
 #!/usr/bin/env python3 
+from sys import argv
 
 def trim_both(text):
     while len(text)>0 and text[0] in (' ', '\t'):
@@ -22,18 +23,19 @@ def parse_money(filename):
     a_money = []
     with open(filename) as f:
         text = f.read()
-        for daily in text.split('======'):
-            a_money.append(0)
-            for line in daily.split('\n'): 
-                if trim(line) == '':
-                    continue
-                if line.startswith('--'):   # comment line
-                    continue
+        for line in text.split('\n'):
+            if trim(line) == '':
+                continue
+            if trim(line).startswith('======'):
+                a_money.append(0)
+                continue
+            if line.startswith('--'):   # comment line
+                continue
 
-                content, income, rest = line.split(':')
-                income = trim_both(income)
-                if income[0] == '-':
-                    a_money[-1] += int(income[1:])
+            content, income, rest = line.split(':')
+            income = trim_both(income)
+            if income[0] == '-':
+                a_money[-1] += int(income[1:])
     return a_money
 
 def get_average(datas):
@@ -60,11 +62,8 @@ def obtain_regress(data):
 def print_result_analysis(moneys):
     """ print result """
 
-def write_into_plt(datas, plt_filename):
-    """ write result of analyse into plt_filename """
-
-def plot_plt_filename(plt_filename):
-    """ plot plt_filename by using gnuplot """
+def plot(data):
+    """ plot points by using tkinter"""
 
 def main(filename):
     """
@@ -94,4 +93,5 @@ def obtain_regression_test():
           ]
     print(obtain_regress(data))
 
-main('kakebo.txt')
+filename = argv[1]
+main(filename)
