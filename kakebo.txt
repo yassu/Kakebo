@@ -1,0 +1,5 @@
+-- content, : income : rest money
+
+eat Ramen   : -800   : 9485
+buy Pepshi  : -100   : 9385
+dinner      : -315   : 8970
